@@ -25,3 +25,4 @@ jobs:
     - name: Publish
       run: |
          python scrape.py
+         git status
