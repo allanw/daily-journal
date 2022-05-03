@@ -25,4 +25,6 @@ jobs:
     - name: Publish
       run: |
          python scrape.py
-         git status
+         git add foo.txt
+         git commit -m 'adding foo.txt'
+         git push
