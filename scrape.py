@@ -1,6 +1,8 @@
 from playwright.sync_api import sync_playwright
 import os
-import enchant
+from enchant.checker import SpellChecker
+
+chkr = SpellChecker("en_UK")
 
 playwright = sync_playwright().start()
 
@@ -19,7 +21,12 @@ for post in page.query_selector_all('p'):
   page2 = browser.new_page()
   page2.goto(url) 
   for para in page2.query_selector_all("p"):
-    f.write(para.inner_html())
+    innerhtml = para.inner_html()
+    chkr.set_text(innerhtml)
+    for err in chkr:
+      sug = err.suggest()[0]
+      err.replace(sug)
+    f.write(chkr.get_text())
     break_out_flag = True
     break
   if break_out_flag:
