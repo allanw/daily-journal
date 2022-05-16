@@ -17,7 +17,7 @@ break_out_flag = False
 for post in page.query_selector_all('p'):
   if not os.path.exists('2022'):
     os.mkdir('2022')
-  f = open('2022/foo.txt', 'w')
+  f = open('2022/{}.txt'.format(post.inner_text), 'w')
   url = post.eval_on_selector("a", "el => el.href")
   page2 = browser.new_page()
   page2.goto(url) 
