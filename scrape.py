@@ -3,6 +3,7 @@ import os
 from enchant.checker import SpellChecker
 
 chkr = SpellChecker("en_UK")
+chkr.add("Haglund's") # alternatively can maybe use PWL (personal word list) in Enchant
 
 playwright = sync_playwright().start()
 
