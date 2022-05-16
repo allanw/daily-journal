@@ -10,7 +10,7 @@ page.goto("https://daily.al.run/")
 
 break_out_flag = False
 for post in page.query_selector_all('p'):
-  f = open('foo.txt', 'w')
+  f = open('2022/foo.txt', 'w')
   url = post.eval_on_selector("a", "el => el.href")
   page2 = browser.new_page()
   page2.goto(url) 
