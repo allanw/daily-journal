@@ -13,11 +13,11 @@ page = browser.new_page()
 
 page.goto("https://daily.al.run/")
 
-break_out_flag = False
+# break_out_flag = False
 for post in page.query_selector_all('p'):
   if not os.path.exists('2022'):
     os.mkdir('2022')
-  f = open('2022/{}.txt'.format(post.inner_text), 'w')
+  f = open('2022/{}.txt'.format(post.inner_text()), 'w')
   url = post.eval_on_selector("a", "el => el.href")
   page2 = browser.new_page()
   page2.goto(url) 
@@ -28,10 +28,10 @@ for post in page.query_selector_all('p'):
       sug = err.suggest()[0]
       err.replace(sug)
     f.write(chkr.get_text())
-    break_out_flag = True
-    break
-  if break_out_flag:
-    break
+#     break_out_flag = True
+#     break
+#   if break_out_flag:
+#     break
 
 browser.close()
 
