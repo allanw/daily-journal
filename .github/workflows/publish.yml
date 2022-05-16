@@ -25,7 +25,7 @@ jobs:
     - name: Publish
       run: |
          python scrape.py
-         sqlite-utils insert-files foo.db foo 2022/*
+         sqlite-utils insert-files foo.db foo 2022/* --text
          # cat 2022/* > combined.txt
          git config user.name "Automated"
          git config user.email "actions@users.noreply.github.com"
