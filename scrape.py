@@ -27,7 +27,7 @@ for post in page.query_selector_all('p'):
     for err in chkr:
       sug = err.suggest()[0]
       err.replace(sug)
-    f.write(chkr.get_text())
+    f.write(chkr.get_text().strip())
 #     break_out_flag = True
 #     break
 #   if break_out_flag:
