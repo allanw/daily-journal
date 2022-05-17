@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ main ]
   schedule:
-    - cron: "0 * * * *"
+    - cron: "0 14 * * *"
 
 jobs:
   deploy:
@@ -45,5 +45,5 @@ jobs:
       run: |-
         gcloud config set run/region asia-southeast1
         gcloud config set project daily-al-run
-        datasette publish cloudrun foo.db --service=daily-al-run
+        datasette publish cloudrun foo.db --service=daily-al-run --metadata metadata.json
         
