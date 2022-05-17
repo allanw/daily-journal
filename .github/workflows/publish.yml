@@ -9,6 +9,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: als-env
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.10
