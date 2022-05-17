@@ -43,5 +43,5 @@ jobs:
       run: |-
         gcloud config set run/region australia-southeast1
         gcloud config set project daily-al-run
-        datasette publish cloudrun foo.db
+        datasette publish cloudrun foo.db --service=daily-al-run
         
