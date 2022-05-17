@@ -1,2 +1,3 @@
-pyenchant
+datasette
 sqlite-utils
+pyenchant
