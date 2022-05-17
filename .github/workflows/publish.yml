@@ -5,10 +5,13 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  schedule:
+    - cron: "0 * * * *"
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: als-env
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.10
@@ -25,9 +28,22 @@ jobs:
     - name: Publish
       run: |
          python scrape.py
-         cat 2022/* > combined.txt
+         sqlite-utils insert-files foo.db foo 2022/* --text --replace # N.B. change replace to upsert to only insert new records instead
+         # cat 2022/* > combined.txt
          git config user.name "Automated"
          git config user.email "actions@users.noreply.github.com"
          git add -A
          git commit -m 'adding all new files'
          git push
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v0'
+      with:
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+    - name: Set up Cloud Run
+      uses: google-github-actions/setup-gcloud@v0
+    - name: Deploy to Cloud Run
+      run: |-
+        gcloud config set run/region asia-southeast1
+        gcloud config set project daily-al-run
+        datasette publish cloudrun foo.db --service=daily-al-run
+        
