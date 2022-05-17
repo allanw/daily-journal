@@ -43,7 +43,7 @@ jobs:
       uses: google-github-actions/setup-gcloud@v0
     - name: Deploy to Cloud Run
       run: |-
-        gcloud config set run/region australia-southeast1
+        gcloud config set run/region asia-southeast1
         gcloud config set project daily-al-run
         datasette publish cloudrun foo.db --service=daily-al-run
         
